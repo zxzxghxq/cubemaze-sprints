@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dndmn7qnl0gas"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial_rail"]
+albedo_color = Color(0.12, 0.15, 0.17, 1)
+metallic = 0.72
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_post"]
+material = SubResource("StandardMaterial_rail")
+top_radius = 0.16
+bottom_radius = 0.19
+height = 2.2
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="BoxMesh_bar"]
+material = SubResource("StandardMaterial_rail")
+size = Vector3(0.22, 0.22, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape_collision"]
+size = Vector3(0.55, 2.2, 10)
+
+[node name="CourseRail" type="StaticBody3D" unique_id=948159674]
+
+[node name="PostA" type="MeshInstance3D" parent="." unique_id=405724088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -4.8)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="PostB" type="MeshInstance3D" parent="." unique_id=364480404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="PostC" type="MeshInstance3D" parent="." unique_id=1511851612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 4.8)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="LowerBar" type="MeshInstance3D" parent="." unique_id=1425213999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+mesh = SubResource("BoxMesh_bar")
+
+[node name="UpperBar" type="MeshInstance3D" parent="." unique_id=77211785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62, 0)
+mesh = SubResource("BoxMesh_bar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1172486432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("BoxShape_collision")

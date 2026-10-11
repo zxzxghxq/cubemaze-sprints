@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://b0qhcai0km7md"]
+
+[ext_resource type="PackedScene" path="res://tar_slime_monster_pack/scenes/tar_trap.tscn" id="1_tar_trap"]
+[ext_resource type="Script" uid="uid://byjxsh6e3j8jb" path="res://scripts/level1/player_hazard.gd" id="2_player_hazard"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial_pit"]
+albedo_color = Color(0.035, 0.025, 0.02, 1)
+roughness = 0.96
+
+[sub_resource type="BoxMesh" id="BoxMesh_pit"]
+material = SubResource("StandardMaterial_pit")
+size = Vector3(8, 0.4, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape_player_hazard"]
+size = Vector3(8, 3, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial_spike"]
+albedo_color = Color(0.34, 0.36, 0.38, 1)
+metallic = 0.82
+roughness = 0.24
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_spike"]
+material = SubResource("StandardMaterial_spike")
+top_radius = 0.0
+bottom_radius = 0.48
+height = 2.5
+radial_segments = 10
+
+[node name="MonsterSpikePit" type="Node3D" unique_id=1823157672]
+
+[node name="PitBottom" type="MeshInstance3D" parent="." unique_id=1881817108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9607531, 0)
+mesh = SubResource("BoxMesh_pit")
+
+[node name="TarTrapAtBottom" parent="." unique_id=556197941 instance=ExtResource("1_tar_trap")]
+transform = Transform3D(2.2, 0, 0, 0, 1.4, 0, 0, 0, 2.45, 0, -2, 0)
+
+[node name="PlayerHazard" type="Area3D" parent="." unique_id=1263687075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+collision_layer = 0
+monitorable = false
+script = ExtResource("2_player_hazard")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHazard" unique_id=456967768]
+shape = SubResource("BoxShape_player_hazard")
+
+[node name="Spike01" type="MeshInstance3D" parent="." unique_id=30986174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.8301786, -2.7)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike02" type="MeshInstance3D" parent="." unique_id=598408438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8301786, -2.7)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike03" type="MeshInstance3D" parent="." unique_id=1372466107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -0.8301786, -2.7)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike04" type="MeshInstance3D" parent="." unique_id=1464537184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.8301786, -0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike05" type="MeshInstance3D" parent="." unique_id=409607788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8301786, -0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike06" type="MeshInstance3D" parent="." unique_id=41151488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -0.8301786, -0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike07" type="MeshInstance3D" parent="." unique_id=908089132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.8301786, 0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike08" type="MeshInstance3D" parent="." unique_id=278001214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8301786, 0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike09" type="MeshInstance3D" parent="." unique_id=1138037838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -0.8301786, 0.9)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike10" type="MeshInstance3D" parent="." unique_id=262793854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -0.8301786, 2.7)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike11" type="MeshInstance3D" parent="." unique_id=452375910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8301786, 2.7)
+mesh = SubResource("CylinderMesh_spike")
+
+[node name="Spike12" type="MeshInstance3D" parent="." unique_id=1689748137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -0.8301786, 2.7)
+mesh = SubResource("CylinderMesh_spike")
