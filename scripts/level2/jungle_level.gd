@@ -1,7 +1,7 @@
 extends Node3D
 
 const RUNE_ORDER: Array[String] = ["FROG", "LEAF", "MOON"]
-const NEXT_LEVEL_PATH: String = "res://scenes/mainscience.tscn"
+const NEXT_LEVEL_PATH: String = "res://level3.tscn"
 
 var player: CharacterBody3D
 var stalker: JungleStalker
@@ -419,7 +419,7 @@ func _on_exit_area_body_entered(body: Node3D) -> void:
 	var change_error := get_tree().change_scene_to_file(NEXT_LEVEL_PATH)
 	if change_error != OK:
 		_transition_started = false
-		push_error("Unable to return to the main scene. Error code: %s" % change_error)
+		push_error("Unable to open Level 3. Error code: %s" % change_error)
 
 func _objective_text() -> String:
 	if not has_map:

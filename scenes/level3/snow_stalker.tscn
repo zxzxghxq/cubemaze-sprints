@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/level3/snow_stalker.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://tar_slime_monster_pack/models/tar_slime_monster.glb" id="2_model"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_stalker"]
+radius = 0.9
+height = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcess_stun"]
+emission_shape = 3
+emission_box_extents = Vector3(1.25, 0.3, 1.25)
+direction = Vector3(0, 1, 0)
+spread = 55.0
+initial_velocity_min = 2.5
+initial_velocity_max = 5.0
+gravity = Vector3(0, -3.0, 0)
+color = Color(0.65, 0.9, 1, 0.9)
+
+[sub_resource type="QuadMesh" id="QuadMesh_particle"]
+size = Vector2(0.18, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="EyeMaterial"]
+albedo_color = Color(0.65, 0.92, 1, 1)
+emission_enabled = true
+emission = Color(0.3, 0.8, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereMesh" id="EyeMesh"]
+radius = 0.11
+height = 0.22
+material = SubResource("EyeMaterial")
+
+[node name="SnowStalker" type="CharacterBody3D" groups=["snow_monster"]]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 0.3
+script = ExtResource("1_script")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.5, 0)
+shape = SubResource("CapsuleShape_stalker")
+
+[node name="Visual" type="Node3D" parent="."]
+position = Vector3(0, 0.3, 0)
+
+[node name="MonsterModel" parent="Visual" instance=ExtResource("2_model")]
+scale = Vector3(1.35, 1.35, 1.35)
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.25, 2.25, -0.82)
+mesh = SubResource("EyeMesh")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.25, 2.25, -0.82)
+mesh = SubResource("EyeMesh")
+
+[node name="WarningLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 2.4, 0)
+light_color = Color(0.25, 0.72, 1, 1)
+light_energy = 2.2
+omni_range = 8.0
+shadow_enabled = true
+
+[node name="TrapParticles" type="CPUParticles3D" parent="."]
+position = Vector3(0, 1.0, 0)
+emitting = false
+amount = 44
+lifetime = 1.25
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource("ParticleProcess_stun")
+draw_pass_1 = SubResource("QuadMesh_particle")

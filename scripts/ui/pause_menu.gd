@@ -3,6 +3,7 @@ extends CanvasLayer
 const MAIN_LEVEL_PATH: String = "res://scenes/mainscience.tscn"
 const LEVEL_1_PATH: String = "res://level1.tscn"
 const LEVEL_2_PATH: String = "res://level2.tscn"
+const LEVEL_3_PATH: String = "res://level3.tscn"
 
 @onready var menu_root: Control = $MenuRoot
 @onready var resume_button: Button = $MenuRoot/Center/Panel/Margin/Buttons/ResumeButton
@@ -25,7 +26,9 @@ func _ready() -> void:
 	$MenuRoot/Center/Panel/Margin/Buttons/Level2Button.pressed.connect(
 		_change_level.bind(LEVEL_2_PATH)
 	)
-	$MenuRoot/Center/Panel/Margin/Buttons/Level3Button.visible = false
+	$MenuRoot/Center/Panel/Margin/Buttons/Level3Button.pressed.connect(
+		_change_level.bind(LEVEL_3_PATH)
+	)
 	$MenuRoot/Center/Panel/Margin/Buttons/QuitButton.pressed.connect(_quit_game)
 
 

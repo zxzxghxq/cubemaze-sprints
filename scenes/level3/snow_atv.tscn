@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/level3/snow_atv.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://models/vehicles/snow_atv.glb" id="2_model"]
+
+[sub_resource type="BoxShape3D" id="BoxShape_atv"]
+size = Vector3(2.1, 1.25, 2.85)
+
+[node name="SnowATV" type="RigidBody3D"]
+mass = 360.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.48, 0.08)
+linear_damp = 0.12
+angular_damp = 2.1
+continuous_cd = true
+can_sleep = false
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.95, 0)
+scale = Vector3(0.86, 0.56, 0.82)
+shape = SubResource("BoxShape_atv")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="ATVModel" parent="VisualRoot" instance=ExtResource("2_model")]
+
+[node name="RiderMount" type="Node3D" parent="VisualRoot"]
+position = Vector3(0, 1.32, 0.28)
+
+[node name="SuspensionRays" type="Node3D" parent="."]
+
+[node name="FrontLeft" type="RayCast3D" parent="SuspensionRays"]
+position = Vector3(-0.93, 1.15, -0.86)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 1
+
+[node name="FrontRight" type="RayCast3D" parent="SuspensionRays"]
+position = Vector3(0.93, 1.15, -0.86)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 1
+
+[node name="RearLeft" type="RayCast3D" parent="SuspensionRays"]
+position = Vector3(-0.93, 1.15, 0.88)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 1
+
+[node name="RearRight" type="RayCast3D" parent="SuspensionRays"]
+position = Vector3(0.93, 1.15, 0.88)
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 1
+
+[node name="HeadlightLeft" type="SpotLight3D" parent="."]
+position = Vector3(-0.37, 1.23, 1.2)
+rotation_degrees = Vector3(-7, 180, 0)
+light_color = Color(1, 0.82, 0.53, 1)
+light_energy = 0.9
+spot_range = 15.0
+spot_angle = 28.0
+shadow_enabled = true
+
+[node name="HeadlightRight" type="SpotLight3D" parent="."]
+position = Vector3(0.37, 1.23, 1.2)
+rotation_degrees = Vector3(-7, 180, 0)
+light_color = Color(1, 0.82, 0.53, 1)
+light_energy = 0.9
+spot_range = 15.0
+spot_angle = 28.0
+shadow_enabled = true
+
+[node name="CameraRig" type="Node3D" parent="."]
+position = Vector3(0, 1.65, 0.35)
+rotation_degrees = Vector3(-9, 180, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig"]
+spring_length = 6.4
+margin = 0.25
+collision_mask = 1
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/SpringArm3D"]
+fov = 72.0
+far = 420.0
+
+[node name="VehicleHUD" type="CanvasLayer" parent="."]
+
+[node name="PromptLabel" type="Label" parent="VehicleHUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -88.0
+offset_right = 380.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.94, 0.98, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.05, 0.08, 0.94)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "F  ENTER ALL-TERRAIN VEHICLE"
+horizontal_alignment = 1
