@@ -1,6 +1,6 @@
 extends Node3D
 
-@export_file("*.tscn") var next_level_path: String = "res://scenes/mainscience.tscn"
+@export_file("*.tscn") var next_level_path: String = "res://level2.tscn"
 @export_range(0.0, 5.0, 0.1) var next_level_delay: float = 1.2
 
 @onready var finish_area: Area3D = $FinishArea
